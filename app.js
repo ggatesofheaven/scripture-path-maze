@@ -49,7 +49,7 @@ function renderQuestion(){
  $("#mission-number").textContent=(isReturn?t("return"):t("stop"))+" "+(step+1);
  $("#question").textContent=level==="easy"?t("q"):(level==="medium"?facts[target][lang]:t("choose"));
  $("#reference").textContent=level==="medium"?facts[target].ref:""; $("#feedback").textContent=""; $("#feedback").className="feedback"; $("#learning-card").classList.add("hidden");
- $$(".marker").forEach(m=>{m.classList.remove("current","wrong");m.classList.toggle("correct",visited.includes(m.dataset.id));m.querySelector(".place-name").style.display=level==="hard"&&!visited.includes(m.dataset.id)?"none":"block"});
+ $$(".marker").forEach(m=>{const seen=visited.includes(m.dataset.id);m.classList.remove("current","wrong");m.classList.toggle("correct",seen);m.querySelector(".place-name").style.display=seen?"block":"none"});
  const answers=$("#answers");answers.innerHTML="";
  if(level!=="hard") optionsFor(target).forEach(id=>{const b=document.createElement("button");b.className="answer";b.textContent=name(id);b.addEventListener("click",()=>check(id,b));answers.appendChild(b)});
  updateHud();
@@ -57,7 +57,7 @@ function renderQuestion(){
 function check(id,button){
  if(answered)return; const target=route[step];
  if(id!==target){mistakes++;button.classList.add("wrong");const marker=$('.marker[data-id="'+id+'"]');if(marker)marker.classList.add("wrong");$("#feedback").textContent=t("wrong");$("#feedback").className="feedback bad";updateHud();return}
- answered=true;score+=Math.max(40,100-mistakes*10);visited.push(target);button.classList.add("selected");const marker=$('.marker[data-id="'+target+'"]');marker.classList.add("current","correct");moveTraveller(target);celebrate(places[target].x,places[target].y);$("#feedback").textContent=t("correct");$("#feedback").className="feedback good";$("#learning-title").textContent=name(target)+" · "+facts[target].ref;$("#learning-text").textContent=facts[target][lang];$("#learning-card").classList.remove("hidden");drawRoute();updateHud();
+ answered=true;score+=Math.max(40,100-mistakes*10);visited.push(target);button.classList.add("selected");const marker=$('.marker[data-id="'+target+'"]');marker.classList.add("current","correct");marker.querySelector(".place-name").style.display="block";moveTraveller(target);celebrate(places[target].x,places[target].y);$("#feedback").textContent=t("correct");$("#feedback").className="feedback good";$("#learning-title").textContent=name(target)+" · "+facts[target].ref;$("#learning-text").textContent=facts[target][lang];$("#learning-card").classList.remove("hidden");drawRoute();updateHud();
 }
 function moveTraveller(id){const p=places[id],prev=places[visited[visited.length-2]||"antioch"],sea=(prev.y>35||p.y>35)&&Math.abs(prev.x-p.x)>8;const el=$("#traveller");el.className="traveller "+(sea?"sea":"land");el.style.left=p.x+"%";el.style.top=p.y+"%"}
 function drawRoute(){const ids=visited,p=ids.map(id=>places[id]);if(!p.length)return;$("#route-path").setAttribute("d",p.map((v,i)=>(i?"L":"M")+(v.x*10)+" "+(v.y*6.67)).join(" "))}
