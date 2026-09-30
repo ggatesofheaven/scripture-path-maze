@@ -1,0 +1,9 @@
+{
+  "name": "Scripture Path Maze",
+  "short_name": "Path Maze",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fff8e8",
+  "theme_color": "#075968",
+  "icons": []
+}

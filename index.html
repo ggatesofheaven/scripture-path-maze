@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#075968">
+  <meta name="description" content="Follow Paul and Barnabas through Acts 13–14 in an interactive English and Tamil Bible journey game.">
+  <title>Scripture Path Maze | Learn Bible with Fun</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game" class="game" data-lang="en">
+    <header class="hud">
+      <div class="brand"><span class="brand-mark">✦</span><div><small>LEARN BIBLE WITH FUN</small><strong id="game-title">Scripture Path Maze</strong></div></div>
+      <div class="hud-stats">
+        <div><strong id="progress-count">0 / 9</strong><span id="progress-label">Stops</span></div>
+        <div><strong id="score">0</strong><span id="score-label">Points</span></div>
+        <div><strong id="stars">☆☆☆</strong><span id="stars-label">Stars</span></div>
+      </div>
+      <div class="progress-track"><i id="progress-bar"></i></div>
+    </header>
+
+    <section id="start-screen" class="start-screen">
+      <div class="start-art" aria-hidden="true">⛵</div>
+      <p class="eyebrow">ACTS 13–14 ADVENTURE</p>
+      <h1>Scripture Path Maze</h1>
+      <p id="subtitle">Guide Paul and Barnabas through their first missionary journey.</p>
+      <div class="choice-block">
+        <span id="language-label">Language</span>
+        <div class="segmented" id="language-buttons">
+          <button class="active" data-lang="en">English</button>
+          <button data-lang="ta">தமிழ்</button>
+        </div>
+      </div>
+      <div class="choice-block">
+        <span id="level-label">Choose a level</span>
+        <div class="level-grid" id="level-buttons">
+          <button class="active" data-level="easy"><b id="easy-name">Easy</b><small id="easy-note">Follow the next stop</small></button>
+          <button data-level="medium"><b id="medium-name">Medium</b><small id="medium-note">Match place and event</small></button>
+          <button data-level="hard"><b id="hard-name">Hard</b><small id="hard-note">Rebuild the route</small></button>
+        </div>
+      </div>
+      <button id="start-button" class="primary">Begin the Journey</button>
+      <p class="source-note" id="source-note">Journey sequence checked against Acts 13–14.</p>
+    </section>
+
+    <section id="play-screen" class="play-screen hidden">
+      <div id="map" class="map" role="application" aria-label="Interactive journey map">
+        <img src="assets/journey-map-controlled.webp" alt="Illustrated eastern Mediterranean map">
+        <svg id="route-layer" viewBox="0 0 1000 667" preserveAspectRatio="none" aria-hidden="true">
+          <path id="route-path" d=""></path>
+        </svg>
+        <div id="markers"></div>
+        <div id="traveller" class="traveller sea" aria-hidden="true"><span>⛵</span></div>
+        <div id="celebration" aria-hidden="true"></div>
+      </div>
+      <section class="mission-sheet">
+        <p class="mission-number" id="mission-number">JOURNEY STOP 1</p>
+        <h2 id="question"></h2>
+        <p class="reference" id="reference"></p>
+        <div id="answers" class="answers"></div>
+        <p id="feedback" class="feedback" aria-live="polite"></p>
+        <article id="learning-card" class="learning-card hidden">
+          <h3 id="learning-title"></h3>
+          <p id="learning-text"></p>
+          <button id="next-button" class="primary">Continue</button>
+        </article>
+      </section>
+    </section>
+
+    <section id="finish-screen" class="finish-screen hidden">
+      <div class="finish-icon">🏁</div>
+      <p class="eyebrow">JOURNEY COMPLETE</p>
+      <h2 id="finish-title">Route completed!</h2>
+      <div class="final-stars" id="final-stars">★★★</div>
+      <p id="finish-score"></p>
+      <button id="again-button" class="primary">Play Again</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
