@@ -62,7 +62,7 @@ async function wrongChoice(id,button){
 }
 function setTravellerAt(p,previous){const el=$("#traveller"),from=places[previous]||p,isSea=Math.abs(p.x-from.x)>10&&(p.y>38||from.y>38);el.className="traveller "+(isSea?"ship":"walk");el.style.left=p.x+"%";el.style.top=p.y+"%"}
 async function correctChoice(id,button){
- busy=true;$$('#answers button').forEach(b=>b.disabled=true);button.classList.add("selected");const previous=visited[visited.length-1];setTraveller(id,previous);await delay(1600);visited.push(id);score+=Math.max(50,100-mistakes*5);addFlag(id,visited.length);drawRoute();showRibbon(t("correct"),"good");launchFireworks(places[id].x,places[id].y);$("#learning-title").textContent=name(id)+" · "+facts[id].ref;$("#learning-text").textContent=facts[id][lang];$("#learning-card").classList.remove("hidden");updateHud();busy=false
+ busy=true;$("#feedback-ribbon").className="feedback-ribbon";$("#feedback-ribbon").textContent="";$$('#answers button').forEach(b=>b.disabled=true);button.classList.add("selected");const previous=visited[visited.length-1];setTraveller(id,previous);await delay(1600);visited.push(id);score+=Math.max(50,100-mistakes*5);addFlag(id,visited.length);drawRoute();showRibbon(t("correct"),"good");launchFireworks(places[id].x,places[id].y);$("#learning-title").textContent=name(id)+" · "+facts[id].ref;$("#learning-text").textContent=facts[id][lang];$("#learning-card").classList.remove("hidden");updateHud();busy=false
 }
 function choose(id,button){if(busy)return;const target=route[step];if(id===target)correctChoice(id,button);else wrongChoice(id,button)}
 function showRibbon(text,type){const r=$("#feedback-ribbon");r.textContent=text;r.className="feedback-ribbon "+type;$("#feedback").textContent=text}
